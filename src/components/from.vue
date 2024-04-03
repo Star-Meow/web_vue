@@ -2,15 +2,16 @@
     <form class = "login">
         <div class = "box">
             <div class = "email_input">
-                <label for = "email"> Email</label>
+                <label for = "email"> Email(contact you)</label>
                 <input id = "email" type = "text" v-model= "email"/>
             </div>
 
             
-            <div class = "pass_input">
-                <label for = "password"> Password</label>
-                <input id = "password" type = "text" v-model= "password"/>
+            <div class = "id_input">
+                <label for = "ID"> ID(Student Number)</label>
+                <input id = "ID" type = "text" v-model= "password"/>
             </div>
+            <button @click="loginbtn">Go to Other Page</button>
 
         </div>
     </form>
@@ -22,9 +23,14 @@
     data() {
       return {
         email: "@example.com",
-        password: "",
+        ID: "",
       };
     },
+    methods:{
+    loginbtn(){
+        this.$router.push('')
+    }
+  }
   };
 </script>
 
@@ -57,7 +63,7 @@
     
 }
 
-.pass_input{
+.id_input{
     display: flex;
     flex-direction: column;
     text-align: center;

@@ -11,7 +11,7 @@
                 <label for = "ID"> ID(Student Number)</label>
                 <input id = "ID" type = "text" v-model= "password"/>
             </div>
-            <button @click="loginbtn">Go to Other Page</button>
+            <button @click="loginbtn">送出</button>
 
         </div>
     </form>

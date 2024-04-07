@@ -31,7 +31,7 @@
             </div>
         </div>
 
-
+        
         <div v-for = "(question,index) in question" :key = "index" class = "box">
             <div class = "radiobox">
                 <label for = "q_form"> {{ question }} </label><br>
@@ -40,38 +40,15 @@
                         <label for = "q_form"></label><br>
                         <label for = "q_form" >非常不同意</label>
                     </div>
-                    <div class="ans">
-                        <label for = "q_form"> 1 </label>
-                        <label><input id="ans1" type="radio" v-model="q1_ans" value="1"/></label>
-                    </div>
-                    <div class="ans">
-                        <label for = "q_form"> 2 </label>
-                        <label><input id="ans2" type="radio" v-model="q1_ans" value="2"/></label>
-                    </div>                
-                    <div class="ans">
-                        <label for = "q_form"> 3 </label>
-                        <label><input id="ans3" type="radio" v-model="q1_ans" value="3"/></label>
-                    </div>
-                    <div class="ans">
-                        <label for = "q_form"> 4 </label>
-                        <label><input id="ans4" type="radio" v-model="q1_ans" value="4"/></label>
-                    </div>
-                    <div class="ans">
-                        <label for = "q_form"> 5 </label>
-                        <label><input id="ans5" type="radio" v-model="q1_ans" value="5"/></label>
-                    </div>                
-                    <div class="ans">
-                        <label for = "q_form"> 6 </label>
-                        <label><input id="ans6" type="radio" v-model="q1_ans" value="6"/></label>
-                    </div>
-                    <div class="ans">
-                        <label for = "q_form"> 7 </label>
-                        <label><input id="ans7" type="radio" v-model="q1_ans" value="7"/></label>
+                    <div class="ans" v-for="i in 7" :key="i">
+                        <label>{{ i }}</label>
+                        <input type="radio" :id="'ans' + i + '_' + index" :value="i" v-model="q_ans[index]"/>
                     </div>
                     <div class="ans">
                         <label for = "q_form"></label><br>
                         <label for = "q_form">非常同意</label>
                     </div>
+                
                 </div>
             </div>
         </div>
@@ -80,7 +57,13 @@
         <div class = "box">
             <div class = "ans_input">
                     <label> 回饋區</label>
-                    <input id = "ans" type = "text" v-model= "ans"/>
+                    <input id = "ans1" type = "text" v-model= "ans[0]"/>
+            </div>
+        </div>
+        <div class = "box">
+            <div class = "ans_input">
+                    <label> 在與人合作上是否有其他問題?</label>
+                    <input id = "ans2" type = "text" v-model= "ans[1]"/>
             </div>
         </div>
     </form>
@@ -92,12 +75,12 @@
   export default {
     data() {
       return {
-        ans: "",
+        ans: Array(2).fill(""),
         ID: "",
         gender:"",
         ord:"",
         trygame:"",
-        q1_ans:"",
+        q_ans: Array(14).fill(""),
         question:[
             "你知道怎麼寫程式-M",
             "你覺得自己可以用程式語言跟電腦溝通-M",
@@ -120,7 +103,9 @@
 
     methods:{
 
+            
     }
+    
 
   };
 </script>
@@ -134,7 +119,7 @@
     justify-content: center; /* 水平居中 */
     align-items: center; /* 垂直居中 */
     background-color: #f7f7f7;
-    height: 100vh;
+    height: auto;
 
 }
 

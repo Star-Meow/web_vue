@@ -4,7 +4,7 @@
         <div class = "box">
             <div class = "id_input">
                 <label for = "ID"> 學號</label>
-                <input id = "ID" type = "text" v-model= "password"/>
+                <input id = "ID" type = "text" v-model= "ID"/>
             </div>
 
             <div class = "radiobox">
@@ -16,11 +16,11 @@
 
             <div class = "radiobox">
                 <label for = "class"> 年級</label><br>
-                <label><input id="term_class" type="radio" v-model="ord" value="1"/>大一</label>
-                <label><input id="term_class" type="radio" v-model="ord" value="2"/>大二</label>
-                <label><input id="term_class" type="radio" v-model="ord" value="3"/>大三</label>
-                <label><input id="term_class" type="radio" v-model="ord" value="4"/>大四</label>
-                <label><input id="term_class" type="radio" v-model="ord" value="5"/>畢業或其他</label>
+                <label><input id="term_class" type="radio" v-model="old" value="1"/>大一</label>
+                <label><input id="term_class" type="radio" v-model="old" value="2"/>大二</label>
+                <label><input id="term_class" type="radio" v-model="old" value="3"/>大三</label>
+                <label><input id="term_class" type="radio" v-model="old" value="4"/>大四</label>
+                <label><input id="term_class" type="radio" v-model="old" value="5"/>畢業或其他</label>
             </div>
 
             <div class = "radiobox">
@@ -65,7 +65,13 @@
                     <label> 在與人合作上是否有其他問題?</label>
                     <input id = "ans2" type = "text" v-model= "ans[1]"/>
             </div>
+            
         </div>
+
+        <div >
+            <button  type="button" class="subbtn" @click="subForm">送出表單</button>
+        </div>
+
     </form>
 
 
@@ -78,7 +84,7 @@
         ans: Array(2).fill(""),
         ID: "",
         gender:"",
-        ord:"",
+        old:"",
         trygame:"",
         q_ans: Array(14).fill(""),
         question:[
@@ -102,8 +108,15 @@
     },
 
     methods:{
+        subForm() {
 
-            
+            console.log(this.ID);
+            console.log(this.gender);
+            console.log(this.old);
+            console.log(this.trygame);
+            console.log(this.q_ans);
+            console.log(this.ans);
+        }
     }
     
 
@@ -179,5 +192,27 @@ label{
     
     text-align: left;
     margin-bottom: 15px;
+}
+
+.subbtn {
+  position: fixed;
+  bottom: 70px; /* 距离底部的距离 */
+  right: 70px; /* 距离右侧的距离 */
+}
+
+/* 可以根据需要调整按钮的样式 */
+.subbtn {
+  padding: 15px 25px;
+  font-size: 18px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* 可以添加其他样式，如 hover 效果等 */
+.subbtn:hover {
+  background-color: #0056b3;
 }
 </style>

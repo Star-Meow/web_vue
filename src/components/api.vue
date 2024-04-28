@@ -7,9 +7,9 @@
     export default {
     created() {
 
-        const formData = this.$route.params.formData;
+        const data = this.$route.params.data;
 
-        console.log(formData);
+        console.log(data);
     }
     }
 </script>

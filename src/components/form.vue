@@ -69,8 +69,8 @@
         </div>
 
         <div >
-            <router-link :to="{name: Api, params: {data:formData}}">
-                <button  type="button" class="subbtn" @click="subForm">送出表單</button>
+            <router-link :to="{ name: 'api', params: { data: formData } }">
+                <button type="button" class="subbtn" @click="subForm">送出表單</button>
             </router-link>
         </div>
 
@@ -129,8 +129,9 @@ import Api from './api.vue';
             q_ans: this.q_ans,
             ans: this.ans
             };
-            
+            this.$router.push({ name: 'api', params: { data: formData }});
         }
+
     }
     
 

@@ -69,7 +69,9 @@
         </div>
 
         <div >
-            <button  type="button" class="subbtn" @click="subForm">送出表單</button>
+            <router-link :to="{name: Api, params: {data:formData}}">
+                <button  type="button" class="subbtn" @click="subForm">送出表單</button>
+            </router-link>
         </div>
 
     </form>
@@ -78,6 +80,9 @@
 </template>
 
 <script>
+import router from '@/router';
+import Api from './api.vue';
+
   export default {
     data() {
       return {
@@ -109,13 +114,22 @@
 
     methods:{
         subForm() {
-
             console.log(this.ID);
             console.log(this.gender);
             console.log(this.old);
             console.log(this.trygame);
             console.log(this.q_ans);
             console.log(this.ans);
+            //------------------------
+            const formData = {
+            ID: this.ID,
+            gender: this.gender,
+            old: this.old,
+            trygame: this.trygame,
+            q_ans: this.q_ans,
+            ans: this.ans
+            };
+            
         }
     }
     

@@ -1,15 +1,18 @@
 <template>
-    <frominput />
+  <RouterView />
+
 </template>
 
 <script>
 
-import frominput from "./components/from.vue"
+
+import { RouterView } from 'vue-router';
 export default {
-  name: 'App',
-  components: {
-    frominput,
-  }
+name: 'App',
+components: {
+
+  RouterView // 使用 RouterView 來顯示匹配的路由組件
+}
 }
 </script>
 

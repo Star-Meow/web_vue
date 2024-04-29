@@ -1,15 +1,29 @@
 <template>
-    <p>api</p>
-
+    <div>
+        <h1>{{ message }}</h1>
+        <h1>api</h1>
+    </div>
 </template>
-
+  
 <script>
-    export default {
+import axios from 'axios';
+
+export default {
+    data() {
+        return {
+            message: ''
+        };
+    },
     created() {
-
-        const data = this.$route.params.data;
-
-        console.log(data);
+        axios.get('http://127.0.0.1:5000/data')
+            .then(response => {
+                this.message = response.data.message;
+                
+            })
+            .catch(error => {
+                this.message = 'error';
+                console.error('Error fetching data from Flask API:', error);
+            });
     }
-    }
+}
 </script>

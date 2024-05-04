@@ -25,13 +25,14 @@ def data():
         ans = data.get('ans', [])
 
         result = {
-            "ID": id,
-            "gender": gender,
-            "old": old,
-            "trygame": trygame,
-            "q_ans": q_ans,
-            "ans": ans
+            "ID": id if id else 109021071,
+            "gender": gender if gender else 0,
+            "old": old if old else 4,
+            "trygame": trygame if trygame else 1,
+            "q_ans": q_ans if q_ans == '' else [7] * 14,
+            "ans": ans if ans == '' else ['None'] * 2  
         }
+        inputdb(result)
         print(result)
         return jsonify(result)
     else:

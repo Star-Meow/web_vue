@@ -80,63 +80,67 @@
 </template>
 
 <script>
-import router from '@/router';
-import Api from './api.vue';
+import axios from 'axios';
 
-  export default {
-    data() {
-      return {
-        ans: Array(2).fill(""),
-        ID: "",
-        gender:"",
-        old:"",
-        trygame:"",
-        q_ans: Array(14).fill(""),
-        question:[
-            "你知道怎麼寫程式-M",
-            "你覺得自己可以用程式語言跟電腦溝通-M",
-            "你覺得成程式碼像數學一樣難懂-M",
-            "你不知道有什麼資源能解決你程式的問題-M",
-            "你會好奇別人程式怎麼寫-M",
-            "你喜歡想天馬行空的事-A",
-            "你覺得自己很有想法-A",
-            "在畫圖時你知道怎麼找參考-A",
-            "你覺得自己沒辦法把想法做出來-A",
-            "你常被說是細心的人-A",
-            "你喜歡規劃自己的時間-D",
-            "你平常會督促朋友一起做作業-D",
-            "你能清楚表達自己的想法-D",
-            "你不覺得自己是團隊的一份子-D",
-            "比起聆聽你更想表達自己-D",
-        ]
+export default {
+  data() {
+    return {
+      ans: Array(2).fill(""),
+      ID: "",
+      gender:"",
+      old:"",
+      trygame:"",
+      q_ans: Array(14).fill(""),
+      formData: {}, // 將 formData 添加到 data 中
+      question:[
+        "你知道怎麼寫程式-M",
+        "你覺得自己可以用程式語言跟電腦溝通-M",
+        "你覺得成程式碼像數學一樣難懂-M",
+        "你不知道有什麼資源能解決你程式的問題-M",
+        "你會好奇別人程式怎麼寫-M",
+        "你喜歡想天馬行空的事-A",
+        "你覺得自己很有想法-A",
+        "在畫圖時你知道怎麼找參考-A",
+        "你覺得自己沒辦法把想法做出來-A",
+        "你常被說是細心的人-A",
+        "你喜歡規劃自己的時間-D",
+        "你平常會督促朋友一起做作業-D",
+        "你能清楚表達自己的想法-D",
+        "你不覺得自己是團隊的一份子-D",
+        "比起聆聽你更想表達自己-D",
+      ]
+    };
+  },
+
+  methods:{
+    subForm() {
+      console.log(this.ID);
+      console.log(this.gender);
+      console.log(this.old);
+      console.log(this.trygame);
+      console.log(this.q_ans);
+      console.log(this.ans);
+      //------------------------
+      this.formData = { // 更新 formData 的值
+        ID: this.ID,
+        gender: this.gender,
+        old: this.old,
+        trygame: this.trygame,
+        q_ans: this.q_ans,
+        ans: this.ans
       };
-    },
-
-    methods:{
-        subForm() {
-            console.log(this.ID);
-            console.log(this.gender);
-            console.log(this.old);
-            console.log(this.trygame);
-            console.log(this.q_ans);
-            console.log(this.ans);
-            //------------------------
-            const formData = {
-            ID: this.ID,
-            gender: this.gender,
-            old: this.old,
-            trygame: this.trygame,
-            q_ans: this.q_ans,
-            ans: this.ans
-            };
-            this.$router.push({ name: 'api', params: { data: formData }});
-        }
-
+      axios.post('http://127.0.0.1:5000/data', this.formData)
+        .then(response => {
+          console.log('表單提交成功:', response.data);
+        })
+        .catch(error => {
+          console.error('表單提交失敗:', error);
+        });   
     }
-    
-
-  };
+  }
+};
 </script>
+
 
 
 <style scoped>

@@ -6,7 +6,7 @@ import Ans from './components/ans.vue';
 const routes = [
     { path: '/', component: Form }, // 將表單組件設置為首頁路由
     { path: '/api', name: 'api', component: Api }, // 添加API組件的路由
-    { path: '/ans', component: Ans },
+    { path: '/ans', name: 'ans', component: Ans },
 
   ];
 

@@ -14,7 +14,11 @@ export default {
             message: ''
         };
     },
-
+    mounted() {
+        const message = this.$route.params.data;
+        console.log(message);
+        console.log('mounted觸發');
+    }
     
 }
 </script>

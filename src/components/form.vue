@@ -69,9 +69,9 @@
         </div>
 
         <div >
-            <router-link :to="{ name: 'api', params: { data: formData } }">
+
                 <button type="button" class="subbtn" @click="subForm">送出表單</button>
-            </router-link>
+
         </div>
 
     </form>
@@ -132,6 +132,7 @@ export default {
       axios.post('http://127.0.0.1:5000/data', this.formData)
         .then(response => {
           console.log('表單提交成功:', response.data);
+          this.$router.push({ name: 'api', params: { data: this.formData } });
         })
         .catch(error => {
           console.error('表單提交失敗:', error);

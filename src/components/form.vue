@@ -1,34 +1,36 @@
 <template>
 
     <form class = "login">
+          <div class = "box">
+            <h1 for = "title"> 畢專三型人格調查</h1>
+          </div>
         <div class = "box">
             <div class = "id_input">
                 <label for = "ID"> 學號</label>
                 <input id = "ID" type = "text" v-model= "ID"/>
             </div>
-
-            <div class = "radiobox">
-                <label for = "gender"> 生理性別</label><br>
+            <label class = "value1"> 生理性別</label>
+            <div class = "radiobox1">
                 <label><input id="term_gender1" type="radio" v-model="gender" value="male"/>男性</label>
                 <label><input id="term_gender1" type="radio" v-model="gender" value="female"/>女性</label>    
                 <label><input id="term_gender1" type="radio" v-model="gender" value="other"/>不願告訴</label>
             </div>
 
-            <div class = "radiobox">
-                <label for = "class"> 年級</label><br>
+            <label class = "value1"> 年級</label>
+            <div class = "radiobox1">
                 <label><input id="term_class" type="radio" v-model="old" value="1"/>大一</label>
                 <label><input id="term_class" type="radio" v-model="old" value="2"/>大二</label>
                 <label><input id="term_class" type="radio" v-model="old" value="3"/>大三</label>
                 <label><input id="term_class" type="radio" v-model="old" value="4"/>大四</label>
                 <label><input id="term_class" type="radio" v-model="old" value="5"/>畢業或其他</label>
+                
             </div>
-
-            <div class = "radiobox">
-                <label for = "class"> 你是否嘗試做過遊戲</label><br>
+            <label  class = "value1"> 你是否嘗試做過遊戲</label>
+            <div class = "radiobox1">
                 <label><input id="term_class" type="radio" v-model="trygame" value="1"/>是</label>
                 <label><input id="term_class" type="radio" v-model="trygame" value="0"/>否</label>
-
             </div>
+            
         </div>
 
         
@@ -56,13 +58,13 @@
 
         <div class = "box">
             <div class = "ans_input">
-                    <label> 回饋區</label>
+                    <label> 回饋區(可不填寫)</label>
                     <input id = "ans1" type = "text" v-model= "ans[0]"/>
             </div>
         </div>
         <div class = "box">
             <div class = "ans_input">
-                    <label> 在與人合作上是否有其他問題?</label>
+                    <label> 在與人合作上是否有其他問題?(可不填寫)</label>
                     <input id = "ans2" type = "text" v-model= "ans[1]"/>
             </div>
             
@@ -85,12 +87,13 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      ans: Array(2).fill(""),
+
       ID: "",
       gender:"",
       old:"",
       trygame:"",
       q_ans: Array(14).fill(""),
+      ans: Array(2).fill(""),
       formData: {}, // 將 formData 添加到 data 中
       question:[
         "你知道怎麼寫程式-M",
@@ -114,14 +117,21 @@ export default {
 
   methods:{
     subForm() {
-      console.log(this.ID);
-      console.log(this.gender);
-      console.log(this.old);
-      console.log(this.trygame);
-      console.log(this.q_ans);
-      console.log(this.ans);
-      //------------------------
-      this.formData = { // 更新 formData 的值
+        // 检查每个输入项目
+        if (!this.ID || !this.gender || !this.old || !this.trygame) {
+
+            alert("請檢查學號、性別、年級等是否漏填！");
+            return;
+        }
+        for (let i = 0; i < this.q_ans.length; i++) {
+            if (!this.q_ans[i]) {
+
+                alert(`請檢查問題${i + 1}的答案！`);
+                return;
+            }
+        }
+
+      this.formData = { 
         ID: this.ID,
         gender: this.gender,
         old: this.old,
@@ -129,10 +139,21 @@ export default {
         q_ans: this.q_ans,
         ans: this.ans
       };
+      
+      this.$store.dispatch('updateFormData', { 
+          ID: this.ID,
+          gender: this.gender,
+          old: this.old,
+          trygame: this.trygame,
+          q_ans: this.q_ans,
+          ans: this.ans
+          });
+      
+      this.$router.push({ name: 'api' });
       axios.post('http://127.0.0.1:5000/data', this.formData)
         .then(response => {
           console.log('表單提交成功:', response.data);
-          this.$router.push({ name: 'api', params: { data: this.formData } });
+          
         })
         .catch(error => {
           console.error('表單提交失敗:', error);
@@ -151,7 +172,7 @@ export default {
     flex-direction: column;
     justify-content: center; /* 水平居中 */
     align-items: center; /* 垂直居中 */
-    background-color: #f7f7f7;
+    background-color: #ffffff;
     height: auto;
 
 }
@@ -166,6 +187,20 @@ export default {
     width: 800px;;
     background-color: #ffffff;
     margin: 20px;
+}
+
+.value1{
+    display: flex;
+    margin-bottom: 15px;
+    padding: 0 60px;
+}
+
+.radiobox1 {
+    display: flex;
+    flex-direction: row;
+
+    margin-bottom: 15px;
+    padding: 0 60px;
 }
 
 .selectbox{
@@ -235,4 +270,29 @@ label{
 .subbtn:hover {
   background-color: #0056b3;
 }
+
+/* 给输入框设置边框样式 */
+input[type="text"] {
+  /* 设置边框宽度、样式和颜色 */
+  border: 2px solid #8f8f8f; /* 边框颜色为蓝色，可以根据需要调整 */
+  /* 设置圆角 */
+  border-radius: 8px; /* 圆角半径，越大越圆 */
+  /* 设置输入框内边距 */
+  padding: 10px 15px; /* 上下 10px，左右 15px */
+  /* 设置输入框的字体大小和颜色 */
+  font-size: 16px; /* 字体大小 */
+  color: #333; /* 字体颜色 */
+}
+
+/* 悬停时改变输入框边框颜色 */
+input[type="text"]:hover {
+  border-color: #dfdfdf; /* 鼠标悬停时的边框颜色 */
+}
+
+/* 聚焦时改变输入框边框颜色 */
+input[type="text"]:focus {
+  outline: none; /* 移除默认的聚焦边框 */
+  border-color: #8f8f8f; /* 输入框聚焦时的边框颜色 */
+}
+
 </style>

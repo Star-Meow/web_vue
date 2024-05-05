@@ -15,7 +15,8 @@
     "path": "^0.12.7",
     "sql.js": "^1.10.3",
     "vue": "^3.2.13",
-    "vue-router": "^4.3.2"
+    "vue-router": "^4.3.2",
+    "vuex": "^4.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

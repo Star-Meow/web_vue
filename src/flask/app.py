@@ -22,15 +22,16 @@ def data():
         old = data.get('old')
         trygame = data.get('trygame')
         q_ans = data.get('q_ans', [])
-        ans = data.get('ans', [])
+        ans = data['ans']
+        print(ans)
 
         result = {
-            "ID": id if id else 109021071,
-            "gender": gender if gender else 0,
-            "old": old if old else 4,
-            "trygame": trygame if trygame else 1,
-            "q_ans": q_ans if q_ans == '' else [7] * 14,
-            "ans": ans if ans == '' else ['None'] * 2  
+            "ID": id if id else 'None',
+            "gender": gender if gender else 'None',
+            "old": old if old else 'None',
+            "trygame": trygame if trygame else 'None',
+            "q_ans": q_ans if q_ans else [0] * 14,
+            "ans": ans if ans else ['None'] * 2  
         }
         inputdb(result)
         print(result)

@@ -3,15 +3,14 @@ from flask_cors import CORS
 from data_api import *
 
 app = Flask(__name__)
-CORS(app)
+cors = CORS(app, resources={r"/data": {"origins": "http://210.70.86.48:8080"}})
 
 
 
-@app.route('/sub', methods=['POST'])
+@app.route('/sub')
 def sub():
-    data = {'name': name}
-    name = request.form.get()
-    return jsonify(data)
+    name = {'name' : 'test'}
+    return jsonify(name)
 
 @app.route('/data', methods=['POST'])
 def data():
@@ -41,4 +40,4 @@ def data():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='127.0.0.1', port=5000 ,debug=True)

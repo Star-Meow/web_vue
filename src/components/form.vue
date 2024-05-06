@@ -117,7 +117,6 @@ export default {
 
   methods:{
     subForm() {
-        // 检查每个输入项目
         if (!this.ID || !this.gender || !this.old || !this.trygame) {
 
             alert("請檢查學號、性別、年級等是否漏填！");

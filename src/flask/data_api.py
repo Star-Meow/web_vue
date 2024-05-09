@@ -24,11 +24,12 @@ def inputdb(result):
     tryconnection()
     if result:
         q_ans = ''
-        for i in result['q_ans']:
-            if i == result['q_ans'][-1]:
+        for index, i in enumerate(result['q_ans']): 
+            if index == len(result['q_ans'])-1:
+            
                 q_ans = q_ans + str(i)
             else:
-                q_ans = q_ans + ',' + str(i)
+                q_ans = q_ans  + str(i) + ','
         try:
             cursor.execute("INSERT INTO form_ans (id, gender, old, trygame, q_ans, t_ans1, t_ans2) VALUES(?,?,?,?,?,?,?)",(result['ID'], result['gender'], result['old'], result['trygame'], q_ans, result['ans'][0], result['ans'][1]))
             connection.commit()
@@ -37,4 +38,3 @@ def inputdb(result):
         except sqlite3.Error as e:
             print(f"插入错误: {e}")
 
-#      # 提交更改

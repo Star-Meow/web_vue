@@ -3,7 +3,7 @@ from flask_cors import CORS
 from data_api import *
 
 app = Flask(__name__)
-cors = CORS(app, resources={r"/data": {"origins": "http://210.70.86.48:8080"}})
+cors = CORS(app)
 
 
 
@@ -40,4 +40,4 @@ def data():
 
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=5000 ,debug=True)
+    app.run( port=5000 ,debug=True)

@@ -149,7 +149,7 @@ export default {
           });
       
       this.$router.push({ name: 'api' });
-      axios.post('http://210.70.85.150:5000/data', this.formData)
+      axios.post('http://210.70.85.133:5000/data', this.formData)
         .then(response => {
           console.log('表單提交成功:', response.data);
           

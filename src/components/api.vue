@@ -2,20 +2,7 @@
     <div class = main>
         <div class = box>
             <h1>{{ formData }}</h1>
-            <div class = score>
-                <div>
-                    <h1>M型</h1>
-                    <h1>{{ sumM }}</h1>
-                </div>
-                <div>
-                    <h1>A型</h1>
-                    <h1>{{ sumA }}</h1>
-                </div>
-                <div>
-                    <h1>D型</h1>
-                    <h1>{{ sumD }}</h1>
-                </div>            
-            </div>
+            <h1>非常感謝您的填寫</h1>
             
         </div>
     </div>

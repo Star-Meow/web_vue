@@ -7,10 +7,11 @@ cors = CORS(app)
 
 
 
-@app.route('/sub')
+@app.route('/sub', methods=['GET'])
 def sub():
-    name = {'name' : 'test'}
-    return jsonify(name)
+    ans = jsonify(MAD())
+
+    return ans
 
 @app.route('/data', methods=['POST'])
 def data():
@@ -33,7 +34,6 @@ def data():
             "ans": ans if ans else ['None'] * 2  
         }
         inputdb(result)
-        print(result)
         return jsonify(result)
     else:
         return jsonify({"error": "No data received"})

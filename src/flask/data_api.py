@@ -44,7 +44,7 @@ def inputdb(result):
             tp = 'M'
         elif x == 1:
             tp = 'A'
-        elif x == 3:
+        elif x == 2:
             tp = 'D'
         print(x)
         print(tp)

@@ -71,4 +71,26 @@ def MAD():
     for row in result:
         if row[0] in stats:
             stats[row[0]] = row[1]
-    return stats
+
+    m = cursor.execute("SELECT * FROM form_ans WHERE type = ?", ("M",))
+    ans = m.fetchall()
+    t = ''
+    
+    lst = []
+    for i,j in enumerate(ans):
+        sc = 0
+        t = ans[i][4]
+        t = t.split(",")
+        for k in range(5):
+            sc += int(t[k])
+
+    
+        data = {
+        "id": ans[i][0],
+        "score": sc
+        }
+        lst.append(data)
+    
+        
+    connection.close()
+    return stats,lst

@@ -75,6 +75,7 @@ def MAD():
     m = cursor.execute("SELECT * FROM form_ans WHERE type = ?", ("M",))
     ans = m.fetchall()
     t = ''
+    c = 0
     
     lst = []
     for i,j in enumerate(ans):
@@ -90,7 +91,8 @@ def MAD():
         "score": sc
         }
         lst.append(data)
-    
+        c +=1
+    print(c)
         
     connection.close()
     return stats,lst
